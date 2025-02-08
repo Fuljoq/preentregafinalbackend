@@ -1,6 +1,6 @@
-import express from 'express';
-import ProductModel from '../models/ProductModel.js';
-import fs from 'fs/promises';
+const express = require('express');
+const ProductModel = require('./models/ProductModel');
+const fs = require('fs').promises;
 
 const router = express.Router();
 const PRODUCTS_FILE = './data/products.json';
@@ -105,4 +105,4 @@ router.delete('/:id', async (req, res) => {
   res.status(200).json(deletedProduct);
 });
 
-export default router;
+module.exports = router;

@@ -2,10 +2,10 @@
   "name": "preentrega1backend",
   "version": "1.0.0",
   "description": "Backend para preentrega con Express, Handlebars y Socket.io",
-  "main": "app.js",
+  "main": "src/app.js",
   "scripts": {
-    "start": "node app.js",
-    "dev": "nodemon app.js",
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js",
     "build": "echo 'Build script not defined yet'",
     "test": "echo 'Test script not defined yet'"
   },

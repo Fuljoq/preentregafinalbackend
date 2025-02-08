@@ -1,9 +1,11 @@
-import express from 'express';
-import fs from 'fs/promises';
+const express = require('express');
+const fs = require('fs').promises;
 
+const ProductModel = require('./models/ProductModel');
 const router = express.Router();
 const CARTS_FILE = './data/carts.json';
 const PRODUCTS_FILE = './data/products.json';
+
 
 async function getCarts() {
   try {
@@ -70,4 +72,4 @@ router.delete('/:cid/products/:pid', async (req, res) => {
   res.status(200).json(cart);
 });
 
-export default router;
+module.exports = router;

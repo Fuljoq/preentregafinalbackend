@@ -2,7 +2,7 @@ const express = require('express');
 const { Server } = require('socket.io');
 const http = require('http');
 const path = require('path');
-const exphbs = require('express-handlebars');
+const { engine } = require('express-handlebars');
 const mongoose = require('mongoose');
 const productsRouter = require('./routes/products');
 const cartsRouter = require('./routes/carts');
@@ -17,13 +17,22 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
 
-app.engine('hbs', exphbs({ extname: 'hbs', defaultLayout: 'main', layoutsDir: path.join(__dirname, 'views', 'layout') }));
-app.set('view engine', 'hbs');
+app.engine('handlebars', engine({ 
+    extname: '.handlebars', 
+    defaultLayout: 'main', 
+    layoutsDir: path.join(__dirname, 'views', 'layout') 
+}));
+app.set('view engine', 'handlebars');
 app.set('views', path.join(__dirname, 'views'));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Ruta raíz
+app.get('/', (req, res) => {
+    res.render('home');
+});
 
 app.use('/api/products', productsRouter);
 app.use('/api/carts', cartsRouter);
