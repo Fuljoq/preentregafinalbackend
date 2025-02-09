@@ -8,10 +8,11 @@ const productsRouter = require('./routes/products');
 const cartsRouter = require('./routes/carts');
 const realtimeProductsRouter = require('./routes/realtimeproducts');
 
-const dbURI = 'mongodb+srv://joaquinorlandaurosso:kLRiSoDLFoh3I4L2@cluster0.bgjej.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+const uri = "mongodb+srv://coderhouse:codercoder2023@cluster0.wpxpupc.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log('MongoDB connected'))
     .catch(err => console.log(err));
+
 
 const app = express();
 const server = http.createServer(app);
@@ -29,7 +30,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Ruta raíz
+
 app.get('/', (req, res) => {
     res.render('home');
 });
@@ -38,7 +39,7 @@ app.use('/api/products', productsRouter);
 app.use('/api/carts', cartsRouter);
 app.use('/realtimeproducts', realtimeProductsRouter);
 
-// Manejo de errores
+
 app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).send('Something broke!');
@@ -63,3 +64,7 @@ const PORT = 8080;
 server.listen(PORT, () => {
     console.log(`Servidor corriendo en http://localhost:${PORT}`);
 });
+
+
+
+
